@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package red.proto.account;
+
+import "common.proto";
+import "account.proto";
+
+service AccountAoService {
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {}
+    rpc Transfer(AccountTransferRequest) returns (AccountTransferResponse) {}
+    rpc StoreValue(StoreValueRequest) returns (StoreValueResponse) {}
+    rpc GetEnvelopeAccountByUserId(GetEnvelopeAccountByUserIdRequest) returns (GetEnvelopeAccountByUserIdResponse) {}
+    rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
+}
+
+message CreateAccountRequest {
+    RequestHeader req_header = 1;
+    uint64 user_id = 2;
+    string user_name = 3;
+    string account_name = 4;
+    uint32 account_type = 5;
+    string currency_code = 6;
+    uint64 amount = 7;
+
+}
+
+message CreateAccountResponse {
+    ResponseHeader resp_header = 1;
+    Account account = 2;
+}
+
+message AccountTransferRequest {
+    RequestHeader req_header = 1;
+    AccountTransfer account_transfer = 2;
+}
+
+message AccountTransferResponse {
+    ResponseHeader resp_header = 1;
+    int32 transfer_status = 2;
+}
+
+message StoreValueRequest {
+    RequestHeader req_header = 1;
+    AccountTransfer account_transfer = 2;
+}
+
+message StoreValueResponse {
+    ResponseHeader resp_header = 1;
+    int32 transfer_status = 2;
+}
+
+message GetEnvelopeAccountByUserIdRequest {
+    RequestHeader req_header = 1;
+    uint64 user_id = 2;
+}
+
+message GetEnvelopeAccountByUserIdResponse {
+    ResponseHeader resp_header = 1;
+    repeated Account accounts = 2;
+}
+
+message GetAccountRequest {
+    RequestHeader req_header = 1;
+    string account_no = 2;
+}
+
+message GetAccountResponse {
+    ResponseHeader resp_header = 1;
+    Account account = 2;
+}
+
+

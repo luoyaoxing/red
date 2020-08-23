@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package red.proto.envelope;
+
+message EnvelopeGoods {
+    string envelope_no = 1;
+    uint32 envelope_type = 2;
+    string account_no = 3;
+    string origin_envelopeNo = 4;
+    string user_name = 5;
+    uint64 user_id = 6;
+    string blessing = 7;
+    uint64 amount = 8;
+    uint64 amount_one = 9;
+    uint32 quantity = 10;
+    uint64 remain_amount = 11;
+    uint32 remain_quantity = 12;
+    uint32 order_type = 13;
+    uint32 status = 14;
+    uint32 pay_status = 15;
+    uint64 expire_at = 16;
+    uint64 created_at = 17;
+    uint64 update_at = 18;
+}
+
+message RedEnvelopeItem {
+    string item_no = 1;
+    string envelope_no = 2;
+    string user_name = 3;
+    uint64 user_id = 4;
+    uint64 amount = 5;
+    uint64 quantity = 6;
+    uint64 remain_amount = 7;
+    string account_no = 8;
+    uint32 pay_status = 9;
+    bool is_luckiest = 10;
+    string desc = 11;
+    uint64 created_at = 12;
+    uint64 update_at = 13;
+}

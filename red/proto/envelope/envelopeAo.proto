@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package red.proto.envelope;
+
+import "envelope.proto";
+import "common.proto";
+
+// 发送红包
+message RedEnvelopeSendRequest {
+    RequestHeader req_header = 1;
+    uint32 envelope_type = 2;
+    string user_name = 3;
+    uint64 user_id = 4;
+    string blessing = 5;
+    uint64 amount = 6;
+    uint32 quantity = 7;
+}
+
+message RedEnvelopeSendResponse {
+    ResponseHeader rsp_header = 1;
+    EnvelopeGoods envelope_goods = 2;
+    string link = 3;
+}
+
+// 收红包
+message RedEnvelopeReceiveRequest {
+    RequestHeader req_header = 1;
+    string envelope_no = 2;
+    string user_name = 3;
+    uint64 user_id = 4;
+    string account_no = 5;
+}
+
+message RedEnvelopeReceiveResponse {
+    ResponseHeader rsp_header = 1;
+    RedEnvelopeItem red_envelope_item = 2;
+}
+
+// 退款红包
+message RedEnvelopeRefundRequest {
+    RequestHeader req_header = 1;
+    string envelope_no = 2;
+}
+
+message RedEnvelopeRefundResponse {
+    ResponseHeader rsp_header = 1;
+    EnvelopeGoods envelope_goods = 2;
+}
+
+// 查询红包商品
+message GetRedEnvelopRequest {
+    RequestHeader req_header = 1;
+    string envelope_no = 2;
+}
+
+message GetRedEnvelopeResponse {
+    ResponseHeader rsp_header = 1;
+    EnvelopeGoods envelope_goods = 2;
+}
+
+// 查询用户发送的红包商品
+message ListSentRequest {
+    RequestHeader req_header = 1;
+    uint64 user_id = 2;
+    uint64 page = 3;
+    uint64 size = 4;
+}
+
+message ListSentResponse {
+    ResponseHeader rsp_header = 1;
+    uint64 total_page = 2;
+    repeated EnvelopeGoods envelope_goods = 3;
+}
+
+// 查询用户收到的红包记录
+message ListReceivedRequest {
+    RequestHeader req_header = 1;
+    uint64 user_id = 2;
+    uint64 page = 3;
+    uint64 size = 4;
+}
+
+message ListReceivedResponse {
+    ResponseHeader rsp_header = 1;
+    uint64 total_page = 2;
+    repeated RedEnvelopeItem envelope_items = 3;
+}
+
+// 查询用户已经抢到的红包列表
+message ListReceivableRequest {
+    RequestHeader req_header = 1;
+    uint64 page = 2;
+    uint64 size = 3;
+}
+
+message ListReceivableResponse {
+    ResponseHeader rsp_header = 1;
+    uint64 total_page = 2;
+    repeated EnvelopeGoods envelope_goods = 3;
+}
+
+// 查询红包商品详情
+message ListItemsRequest {
+    RequestHeader req_header = 1;
+    string envelope_no = 2;
+}
+
+message ListItemsResponse {
+    ResponseHeader rsp_header = 1;
+    repeated RedEnvelopeItem envelope_items = 2;
+}
+
+service RedEnvelopeAo {
+    rpc SendOut(RedEnvelopeSendRequest) returns (RedEnvelopeSendResponse) {}
+    rpc Receive(RedEnvelopeReceiveRequest) returns (RedEnvelopeReceiveResponse) {}
+    rpc Refund(RedEnvelopeRefundRequest) returns (RedEnvelopeRefundResponse) {}
+    rpc Get(GetRedEnvelopRequest) returns (GetRedEnvelopeResponse) {}
+    rpc ListSent(ListSentRequest) returns (ListSentResponse) {}
+    rpc ListReceived(ListReceivedRequest) returns (ListReceivedResponse) {}
+    rpc ListReceivable(ListReceivableRequest) returns (ListReceivableResponse) {}
+    rpc ListItems(ListItemsRequest) returns (ListItemsResponse) {}
+}

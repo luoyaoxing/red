@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package red.proto.account;
+
+message RequestHeader {
+    string source = 1;
+    string chn = 2;
+    string version = 3;
+}
+
+message ResponseHeader {
+    uint32 code = 1;
+    string msg = 2;
+}

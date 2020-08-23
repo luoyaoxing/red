@@ -1,0 +1,8 @@
+{
+  "mysql" : {
+    "xproject" : "root:636968@(127.0.0.1:3306)/xproject?charset=utf8"
+  },
+  "consul" : {
+    "host": "127.0.0.1:8500"
+  }
+}

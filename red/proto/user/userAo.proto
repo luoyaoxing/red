@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package red.proto.user;
+
+import "common.proto";
+
+service UserAoService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+}
+
+message User {
+    uint64 user_id = 1;
+    string user_name = 2;
+    string nick_name = 3;
+}
+
+message CreateUserRequest {
+    RequestHeader req_header = 1;
+    string user_name = 2;
+    string nick_name = 3;
+}
+
+message CreateUserResponse {
+    ResponseHeader resp_header = 1;
+    uint64 user_id = 2;
+}
+
+message GetUserRequest {
+    RequestHeader req_header = 1;
+    uint64 user_id = 2;
+}
+
+message GetUserResponse {
+    ResponseHeader resp_header = 1;
+    User user = 2;
+}

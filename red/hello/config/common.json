@@ -1,0 +1,9 @@
+{
+  "mysql" : {
+    "host" : "daniel.mysql.com",
+    "port" : "3306",
+    "user" : "root",
+    "password" : "636968",
+    "database" : "xproject"
+  }
+}
